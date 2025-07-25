@@ -54,6 +54,8 @@ This is a Retrieval-Augmented Generation (RAG) chatbot designed to assist users 
 ├── streamlit.py                 # Streamlit UI app
 ├── requirements.txt
 └── README.md
+```
+
 
 ## ⚙️ Configuration
 
@@ -62,8 +64,8 @@ Update the URL sources in `./config/config.yaml`:
 ```yaml
 url_webpage_list:
   - https://example.com/forex1
-  - https://example.com/forex2
-
+  - https://example.com/forex2 
+```
 Make sure to place user CSVs in:
 ./data/user_id=<id>/account_stat_summary.csv
 
@@ -80,12 +82,15 @@ Set these environment variables or replace them in constant.py:
 ## 🖥️ Run the App
 
 1. Install dependencies
+   
 ```yaml
 pip install -r requirements.txt
+```
 
 2. Launch Streamlit
 ```yaml
 streamlit run streamlit.py
+```
 
 ## 🧪 Supported Models
 	•	Cohere
