@@ -1,48 +1,111 @@
-# Forex Algorithmic Trading Chatbot Prompts
+# 🌱 AI Chatbot for Forex Algorithmic Trading
 
-This module defines prompt templates for a forex algorithmic trading AI assistant using LangChain's `ChatPromptTemplate` and `MessagesPlaceholder`. These prompts are designed to guide the language model in providing expert insights and concise answers based on trading data and user queries.
-
-## Functions
-
-### `get_qa_prompt(data: str, user_id: int)`
-
-Creates a system prompt for the AI assistant to:
-- Analyze trading strategies and metrics.
-- Provide detailed, insightful, and concise answers based on the provided trading data (`data`) and user ID (`user_id`).
-- Limit responses to three sentences and acknowledge limitations when necessary.
-- Use chat history and user input for context.
-
-**Parameters:**
-- `data` (str): Trading metrics and account summary to be referenced in answers.
-- `user_id` (int): The user's identifier, included in the prompt for context.
-
-**Returns:**  
-A `ChatPromptTemplate` for question-answering.
+This is a Retrieval-Augmented Generation (RAG) chatbot designed to assist users with forex algorithmic trading insights. It leverages LangChain, Cohere, and Hugging Face models to retrieve and generate insightful responses using custom trading data and relevant web resources.
 
 ---
 
-### `get_contextualize_q_prompt()`
+## 🚀 Features
 
-Creates a system prompt instructing the AI to:
-- Reformulate the latest user question into a standalone question, using chat history for context.
-- Avoid answering the question, only rephrasing it if necessary.
-
-**Returns:**  
-A `ChatPromptTemplate` for contextualizing user questions.
+- 💬 Conversational chatbot with memory
+- 📈 Forex trading strategy analysis
+- 🔍 RAG-powered retrieval from online resources and CSV data
+- 🌐 Multi-model support (Cohere, Hugging Face endpoints)
+- 📊 Streamlit-based user interface
 
 ---
 
-## Example Usage
+## 🧠 How It Works
 
-```python
-from modules.prompt import get_qa_prompt, get_contextualize_q_prompt
+1. **Document Loading**  
+   Loads forex-related resources from URLs or CSVs using `WebBaseLoader` and `CSVLoader`.
 
-qa_prompt = get_qa_prompt(data="account metrics here", user_id=1)
-contextualize_q_prompt = get_contextualize_q_prompt()
+2. **Text Splitting & Embedding**  
+   Splits and embeds documents using Cohere embeddings for retrieval.
 
-## Dependencies
+3. **Vector Store & Retrieval**  
+   Stores vectors in ChromaDB and retrieves relevant context during Q&A.
 
-- langchain_core.prompts.ChatPromptTemplate
-- langchain_core.prompts.MessagesPlaceholder
+4. **LLM Invocation**  
+   Uses Cohere or Hugging Face models for context-aware generation.
 
-For more details, see modules/prompt.py# algo_trading_chatbot
+5. **Prompt Templates**  
+   Custom prompts for QA and contextualized question reformulation.
+
+---
+
+## 📁 Project Structure
+
+```text
+.
+├── config/
+│   └── config.yaml              # Contains a list of URLs
+├── data/                        # User trading data
+├── assets/                      # App logo
+├── modules/                     # Custom logic modules
+│   ├── config_parser.py
+│   ├── constant.py
+│   ├── data_parser.py
+│   ├── full_chain.py
+│   ├── llm_model.py
+│   ├── memory_chain.py
+│   ├── prompt.py
+│   ├── splitter.py
+│   └── vectorstore.py
+├── streamlit.py                 # Streamlit UI app
+├── requirements.txt
+└── README.md
+
+## ⚙️ Configuration
+
+Update the URL sources in `./config/config.yaml`:
+
+```yaml
+url_webpage_list:
+  - https://example.com/forex1
+  - https://example.com/forex2
+
+Make sure to place user CSVs in:
+./data/user_id=<id>/account_stat_summary.csv
+
+⸻
+
+## 🔐 API Keys
+
+Set these environment variables or replace them in constant.py:
+	•	HUGGINGFACE_API_KEY
+	•	COHERE_API_KEY
+
+⸻
+
+## 🖥️ Run the App
+
+1. Install dependencies
+```yaml
+pip install -r requirements.txt
+
+2. Launch Streamlit
+```yaml
+streamlit run streamlit.py
+
+## 🧪 Supported Models
+	•	Cohere
+	•	Mistral-7B (Hugging Face)
+	•	BERT / RoBERTa (Q&A)
+
+⸻
+
+## 📝 Notes
+	•	Chat memory is handled in-session using LangChain’s InMemoryChatMessageHistory.
+	•	Prompts are tailored for financial/forex analysis—editable in prompt.py.
+
+⸻
+
+## 📸 Sample UI
+
+A clean and interactive chatbot UI styled with CSS animations and Streamlit components.
+
+⸻
+
+## 📃 License
+
+This project is for educational and demonstration purposes.
