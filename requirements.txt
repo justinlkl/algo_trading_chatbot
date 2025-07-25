@@ -1,0 +1,14 @@
+```txt
+streamlit>=1.32.0
+pandas>=2.2.0
+pyyaml
+langchain>=0.1.13
+langchain-community>=0.0.33
+langchain-core>=0.1.39
+langchain-chroma
+langchain-cohere
+cohere
+chromadb
+huggingface_hub
+requests
+ipython
